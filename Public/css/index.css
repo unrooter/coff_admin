@@ -1,0 +1,48 @@
+.navbar{
+	background:#f9f9f9;
+	margin-bottom: 5px;
+}
+.nav-pills a{
+	color:#996938;
+}
+.navbar-brand{
+	width:100px;
+}
+.nav-pills{
+	padding: 5px 15px;
+}
+.breadcrumb{
+	background:#f9f9f9;
+	margin-bottom: 5px;
+}
+.form-group{
+	margin-bottom: 10px;
+}
+.navbar-right{
+	margin-top: 15px;
+}
+.form-inline{
+	text-align: center;
+}
+.form-inline label{
+   padding:10px 0;
+}
+.house{
+	margin-top: 10px;
+}
+.house_nav{
+	margin-top:10px;
+	margin-bottom:0px;
+}
+.shops{
+	margin:10px  10px; 
+}
+#footer{
+	background:#f9f9f9;
+	padding:2% 0;
+	text-align: center;
+	
+}
+.links a{
+	color:#996938;
+}

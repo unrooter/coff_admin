@@ -1,0 +1,7 @@
+.table tbody tr th{
+	border-top: 0;
+	text-align: center;
+}
+.table tbody tr td{
+	text-align: center;
+}

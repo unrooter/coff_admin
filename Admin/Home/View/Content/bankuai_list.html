@@ -1,0 +1,100 @@
+<include file="Index:header"/>
+<style type="text/css">
+.table th{
+padding: 10px 0 10px 0;
+font-size: 12px;
+}
+.container-fluid .row-fluid:first-child{
+margin-top: 0;
+}
+</style>
+<a href="{:U('Content/ban_add')}">
+	<div id="style-switcher" style="padding: 0 5% 0 0;"><span style="color: white;padding: 9% 0 0 0" >加</span></div>
+</a>
+<div id="content">
+	<div id="content-header">
+	<h1>Dashboard</h1>
+		<div class="btn-group">
+			<a class="btn btn-large tip-bottom" title="Manage Files"><i class="icon-file"></i></a>
+			<a class="btn btn-large tip-bottom" title="Manage Users"><i class="icon-user"></i></a>
+			<a class="btn btn-large tip-bottom" title="Manage Comments"><i class="icon-comment"></i>
+			<span class="label label-important">5</span></a>
+			<a class="btn btn-large tip-bottom" title="Manage Orders"><i class="icon-shopping-cart"></i></a>
+		</div>
+	</div>
+	<div id="breadcrumb">
+		<a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a>
+		<a href="{U('Content/bankuai_list')}" class="current">板块列表</a>
+	</div>
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="widget-box">
+					<div class="widget-content nopadding">
+						<table class="table table-bordered table-striped">
+							<thead>
+								<tr>
+									<th style="width:5%">编号</th>
+									<th style="width:5%">板块名称</th>
+									<th style="width:15%">版块介绍</th>
+									<th style="width:5%">状态</th>
+									<th style="width:5%">排序</th>
+									<th style="width:10%">创建时间</th>
+									<th style="width:10%">操作</th>
+								</tr>
+							</thead>
+							<tbody>
+							 <foreach name="list" item="v">
+								<tr>
+									<td>{$v.id}</td>
+				                    <td>{$v.ban_name}</td>
+				                    <td>{$v.ban_info}</td>
+				                    <td>
+				                    <if condition='$v[status] eq 1'>
+										<a class="red" href="javascript:;" onclick="return statuvalue({$v.id});" title="显示"><div id="zt{$v.id}"><button class="btn btn-miniter btn-success">显示</button></div></a>
+										<else/>
+										<a class="red" href="javascript:;" onclick="return statuvalue({$v.id});" title="不显"><div id="zt{$v.id}"><button class="btn brn-miniter btn-danger">不显</button></div></a>
+									</if>
+				                    </td>
+				                    <td>{$v.order}</td>
+				                    <td>{$v.time|date="Y-m-d H:i:s",###}</td>
+									<td><a href="{:U('Content/ban_edit',array('id'=>$v[id]))}" class="btn btn-success" id="edit">编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:;"  class="btn btn-danger" onclick="return del({$v.id});" >删除</a></td>
+								</tr>
+							</foreach>
+							</tbody>
+						</table>							
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<script type="text/javascript">
+	function del(id){
+		layer.confirm('你确定要删除吗？',{icon:3},function(index){
+		layer.close(index);
+		window.location.href= "__URL__/del/id/"+id+"";
+		})
+	}
+
+	function statuvalue(val){
+		$.post('{:U('status')}',{x:val},
+			function(data){
+				var $v =val;
+				if(data.status){
+					if(data.info == '状态禁止'){
+						var a = '<button class="btn brn-miniter btn-danger">不显</button>';
+						$('#zt'+val).html(a);
+						layer.alert(data.info,{icon:5});
+					}else{
+						var b='<button class="btn btn-miniter btn-success">显示</button>';
+						$('#zt'+val).html(b);
+						layer.alert(data.info,{icon:6});
+					}
+				}
+			});
+		return false;
+	}
+
+</script>
+<include file='Index:footer'/>
